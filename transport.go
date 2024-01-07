@@ -22,6 +22,23 @@ const RaftProtocol protocol.ID = "/raft/1.0.0/rpc"
 
 var raftLogger = logging.Logger("raftlib")
 
+func (log *HcLogToLogger) GetLevel() hclog.Level {
+	switch raftLogger.Level() {
+	case zapcore.DebugLevel:
+		return hclog.Debug
+	case zapcore.InfoLevel:
+		return hclog.Info
+	case zapcore.WarnLevel:
+		return hclog.Warn
+	case zapcore.ErrorLevel, zapcore.DPanicLevel, zapcore.PanicLevel, zapcore.FatalLevel:
+		return hclog.Error
+	case zapcore.InvalidLevel:
+		return hclog.NoLevel
+	default:
+		return hclog.NoLevel
+	}
+}
+
 // HcLogToLogger implements github.com/hashicorp/go-hclog
 type HcLogToLogger struct {
 	extraArgs []interface{}
