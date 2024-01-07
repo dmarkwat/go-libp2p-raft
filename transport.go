@@ -16,6 +16,7 @@ import (
 	"github.com/libp2p/go-libp2p/core/host"
 	"github.com/libp2p/go-libp2p/core/peer"
 	"github.com/libp2p/go-libp2p/core/protocol"
+	"go.uber.org/zap/zapcore"
 )
 
 const RaftProtocol protocol.ID = "/raft/1.0.0/rpc"
